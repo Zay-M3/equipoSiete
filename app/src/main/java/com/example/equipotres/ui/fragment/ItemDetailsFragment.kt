@@ -1,5 +1,4 @@
 package com.example.equipotres.ui.fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +9,18 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.equipotres.R
 import com.example.equipotres.databinding.FragmentItemDetailsBinding
-import com.example.equipotres.viewmodel.InventoryViewModel
 import com.example.equipotres.model.Inventory
+import androidx.navigation.fragment.findNavController
+import com.example.equipotres.viewmodel.InventoryViewModel
+import androidx.fragment.app.viewModels
+
 
 class ItemDetailsFragment : Fragment() {
     private lateinit var _binding: FragmentItemDetailsBinding
     private val binding get() = _binding
-
     //Instancia del ViewModel para manejar la lógica del inventario
     private val inventoryViewModel: InventoryViewModel by viewModels()
 
-    //Almacena el producto que se está mostrando.
     private lateinit var receivedInventory: Inventory
 
 
@@ -44,14 +44,10 @@ class ItemDetailsFragment : Fragment() {
                 return
             }
         setupToolbar()
+        dataInventory()
         controladores()
     }
 
-    private fun controladores() {
-        binding.btnDelete.setOnClickListener {
-            deleteInventory()
-        }
-    }
 
     private fun setupToolbar(){
         binding.toolbarDetail.apply {
@@ -75,6 +71,7 @@ class ItemDetailsFragment : Fragment() {
         }
     }
 
+
     private fun deleteInventory() {
         // Crear diálogo de confirmación
         androidx.appcompat.app.AlertDialog.Builder(requireContext())
@@ -84,7 +81,6 @@ class ItemDetailsFragment : Fragment() {
                 dialog.dismiss() // Cierra el diálogo
             }
             .setPositiveButton("Sí") { dialog, _ ->
-                // ✅ Si confirma, eliminar y regresar
                 inventoryViewModel.deleteInventory(receivedInventory)
                 Toast.makeText(requireContext(), "Producto eliminado", Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
@@ -93,4 +89,31 @@ class ItemDetailsFragment : Fragment() {
             .create()
             .show()
     }
+
+    private fun controladores() {
+        binding.btnDelete.setOnClickListener {
+            deleteInventory()
+        }
+        binding.fabEdit.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putSerializable("dataInventory", receivedInventory)
+            findNavController().navigate(R.id.action_itemDetailsFragment_to_itemEditFragment, bundle)
+        }
+    }
+
+
+    private fun dataInventory() {
+        val receivedBundle = arguments
+        receivedInventory = receivedBundle?.getSerializable("clave") as Inventory
+        binding.tvName.text = "${receivedInventory.name}"
+        binding.tvPrecio.text = "$ ${receivedInventory.price}"
+        binding.tvCantidad.text = "${receivedInventory.quantity}"
+        binding.tvTotal.text = "$ ${
+            inventoryViewModel.totalProducto(
+                receivedInventory.price,
+                receivedInventory.quantity
+            )
+        }
+    }
+
 }
