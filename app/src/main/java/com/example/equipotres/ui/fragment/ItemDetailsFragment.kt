@@ -11,9 +11,10 @@ import com.example.equipotres.R
 import com.example.equipotres.databinding.FragmentItemDetailsBinding
 import com.example.equipotres.model.Inventory
 import com.example.equipotres.viewmodel.InventoryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 
-
+@AndroidEntryPoint
 class ItemDetailsFragment : Fragment() {
     private lateinit var _binding: FragmentItemDetailsBinding
     private val binding get() = _binding

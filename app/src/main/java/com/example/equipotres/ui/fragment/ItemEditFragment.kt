@@ -12,8 +12,9 @@ import com.example.equipotres.viewmodel.InventoryViewModel
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.equipotres.model.Inventory
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ItemEditFragment : Fragment() {
 
     private lateinit var _binding : FragmentItemEditBinding

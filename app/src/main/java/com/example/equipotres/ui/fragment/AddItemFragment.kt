@@ -15,8 +15,9 @@ import com.example.equipotres.viewmodel.InventoryViewModel
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import android.util.Log
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.toString
-
+@AndroidEntryPoint
 class AddItemFragment : Fragment() {
 
     private lateinit var _binding:  FragmentAddItemBinding

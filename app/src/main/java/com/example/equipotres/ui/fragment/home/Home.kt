@@ -14,9 +14,10 @@ import com.example.equipotres.databinding.FragmentHomeBinding
 import com.example.equipotres.utils.SessionManager
 import com.example.equipotres.viewmodel.InventoryViewModel
 import com.example.equipotres.ui.adapter.InventoryAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
 
-
+@AndroidEntryPoint
 class Home : Fragment(R.layout.fragment_home) {
     private lateinit var _binding: FragmentHomeBinding
     private val binding get() = _binding

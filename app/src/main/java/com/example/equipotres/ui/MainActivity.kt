@@ -13,7 +13,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.equipotres.R
 import com.example.equipotres.databinding.ActivityMainBinding
 import com.example.equipotres.utils.SessionManager
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
