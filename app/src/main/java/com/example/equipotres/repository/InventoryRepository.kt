@@ -6,10 +6,12 @@ import com.example.equipotres.model.Inventory
 import com.example.equipotres.model.Product
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
 
-class InventoryRepository (val context : Context) {
-    private var inventoryDao: InventoryDao = InventoryDB.getDatabase(context).inventoryDao()
+class InventoryRepository @Inject constructor (
+    private var inventoryDao: InventoryDao
+){
 
     //Inserta un nuevo registro en la base de datos local.
     suspend fun saveInventory(inventory: Inventory){

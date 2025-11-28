@@ -11,7 +11,9 @@ import com.example.equipotres.R
 import com.example.equipotres.databinding.FragmentLoginBinding
 import com.example.equipotres.utils.SessionManager
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
     private lateinit var binding: FragmentLoginBinding
